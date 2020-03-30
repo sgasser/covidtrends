@@ -588,7 +588,7 @@ let app = new Vue({
 
     selectedScale: 'Logarithmic Scale',
 
-    minCasesInCountry: 10,
+    minCasesInCountry: 0,
 
     dates: [],
 
