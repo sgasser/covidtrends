@@ -1,6 +1,6 @@
 ## What is this?
 
-This is an [interactive graph / animation](https://aatishb.com/covidtrends/) that charts the trajectory of global COVID-19 cases.
+This is an [interactive graph / animation](https://covidtrends.stefangasser.com/) that charts the trajectory of global COVID-19 cases in Italy.
 
 The graph plots the number of new confirmed cases in the past week, versus the total number of confirmed cases.
 
@@ -12,9 +12,11 @@ Notice that most countries follow a similar straight line path, indicating that 
 
 ## Credits
 
-This interactive pulls data on COVID-19 provided by [Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19). Huge thanks to them for making this invaluable data source publicly available.
+Special thanks to [Aatish Bhatia](https://github.com/aatishb) for creating and maintaining the originally [interactive graph / animation](https://github.com/aatishb/covidtrends).
 
-Created by [Aatish Bhatia](https://aatishb.com/) in collaboration with [Henry Reich](https://www.youtube.com/user/minutephysics).
+This interactive pulls data on COVID-19 provided by [Dipartimento della Protezione Civile](https://github.com/pcm-dpc/COVID-19). Huge thanks to them for making this invaluable data source publicly available.
+
+Created by [Aatish Bhatia](https://github.com/aatishb/covidtrends) in collaboration with [Henry Reich](https://www.youtube.com/user/minutephysics).
 
 **With thanks to Upasana Roy, Connie Sun, Ritwick Ghosh, Ann Bybee-Finley, Nicky Case, Mustafa Paksoy, Shekhar Bhatia, Arkarup Banerjee, and Igor Kholopov for their very helpful feedback & suggestions!** Any mistakes or omissions are mine.
 

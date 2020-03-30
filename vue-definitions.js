@@ -128,7 +128,7 @@ Vue.component('graph', {
       }
 
       this.layout = {
-        title: 'Trajectory of COVID-19 '+ this.selectedData + ' (' + this.dates[this.day - 1] + ')',
+        title: 'Regions of Italy - Trajectory of COVID-19 '+ this.selectedData + ' (' + this.dates[this.day - 1] + ')',
         showlegend: false,
         xaxis: {
           title: 'Total ' + this.selectedData,
@@ -382,12 +382,8 @@ let app = new Vue({
     },
 
     pullData(selectedData) {
-
-      if (selectedData == 'Confirmed Cases') {
-       Plotly.d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", this.processData);
-      } else if (selectedData == 'Reported Deaths') {
-       Plotly.d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", this.processData);
-      }
+      this.selectedData = selectedData;
+      Plotly.d3.csv("https://raw.githubusercontent.com/pcm-dpc/COVID-19/c9e73c5c883378e34cf1bbd61f847eaffaea65cc/dati-regioni/dpc-covid19-ita-regioni.csv", this.processData);
     },
 
     removeRepeats(array) {
@@ -395,31 +391,30 @@ let app = new Vue({
     },
 
     processData(data) {
+      let totalKey = 'totale_casi';
+      if (this.selectedData == 'Reported Deaths') {
+        totalKey = 'deceduti';
+      }
 
-      let countriesToLeaveOut = ['Cruise Ship', 'Diamond Princess'];
+      let countriesToLeaveOut = ['In fase di definizione/aggiornamento'];
 
-      let renameCountries = {
-        'Taiwan*': 'Taiwan',
-        'Korea, South': 'South Korea'
-      };
+      let renameCountries = {};
 
-      let countries = data.map(e => e["Country/Region"]);
+      let countries = data.map(e => e["denominazione_regione"]);
+
       countries = this.removeRepeats(countries);
 
-      let dates = Object.keys(data[0]).slice(4);
+      let dates = data.map(e => new Date(Date.parse(e["data"])).toLocaleDateString('en-US'));
+      dates = this.removeRepeats(dates);
+
       this.dates = dates;
 
       //this.day = this.dates.length;
 
       let myData = [];
       for (let country of countries){
-        let countryData = data.filter(e => e["Country/Region"] == country);
-        let arr = [];
-
-        for (let date of dates) {
-          let sum = countryData.map(e => parseInt(e[date]) || 0).reduce((a,b) => a+b);
-          arr.push(sum);
-        }
+        let countryData = data.filter(e => e["denominazione_regione"] == country);
+        let arr = countryData.map(e => parseInt(e[totalKey]));
 
         if (!countriesToLeaveOut.includes(country)) {
 
@@ -503,7 +498,7 @@ let app = new Vue({
     },
 
     createURL() {
-      let baseUrl = 'https://aatishb.com/covidtrends/?';
+      let baseUrl = 'https://covidtrends.stefangasser.com/?';
 
       let queryUrl = new URLSearchParams();
 
@@ -593,7 +588,7 @@ let app = new Vue({
 
     selectedScale: 'Logarithmic Scale',
 
-    minCasesInCountry: 50,
+    minCasesInCountry: 10,
 
     dates: [],
 
@@ -603,7 +598,7 @@ let app = new Vue({
 
     isHidden: true,
 
-    selectedCountries: ['Australia', 'Canada', 'China', 'France', 'Germany', 'Iran', 'Italy', 'Japan', 'South Korea', 'Spain', 'Switzerland', 'US', 'United Kingdom', 'India', 'Pakistan'],
+    selectedCountries: ['Lazio', 'Toscana', 'Liguria', 'Marche', 'Veneto', 'Piemonte', 'Emilia Romagna', 'Lombardia'],
 
     graphMounted: false,
 
