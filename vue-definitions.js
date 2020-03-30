@@ -383,7 +383,7 @@ let app = new Vue({
 
     pullData(selectedData) {
       this.selectedData = selectedData;
-      Plotly.d3.csv("https://raw.githubusercontent.com/pcm-dpc/COVID-19/c9e73c5c883378e34cf1bbd61f847eaffaea65cc/dati-regioni/dpc-covid19-ita-regioni.csv", this.processData);
+      Plotly.d3.csv("https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv", this.processData);
     },
 
     removeRepeats(array) {
